@@ -50,13 +50,11 @@ exports.update = (req, res) => {
     }
 
     const id = req.params.id;
-
-    
 };
 
 // Delete one with id
 exports.delete = (req, res) => {
-
+    
 };
 
 // Delete all
