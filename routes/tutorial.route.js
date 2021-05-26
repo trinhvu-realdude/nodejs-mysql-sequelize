@@ -11,6 +11,15 @@ module.exports = app => {
 
     // Read one with id
     router.get('/:id', tutorials.findOne);
-    
+
+    // Update with id
+    router.put('/:id', tutorials.update);
+
+    // Delete with id
+    router.delete('/:id', tutorials.delete);
+
+    // Delete all
+    router.delete('/', tutorials.deleteAll);
+
     app.use('/api/tutorials', router);
 };

@@ -43,23 +43,73 @@ exports.findOne = async (req, res) => {
 
 // Update
 exports.update = (req, res) => {
-    if (!req.body) {
-        return res.status(400).send({
-            message: "Data to update can not be empty!"
-        });
-    }
 
     const id = req.params.id;
+
+    Tutorial.update(req.body, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Update successfully"
+                });
+            }
+            else {
+                res.send({
+                    message: `Cannot update Tutorial with id=${id}`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: `Error updating with id=${id}`
+            });
+        });
 };
 
 // Delete one with id
 exports.delete = (req, res) => {
-    
+    const id = req.params.id;
+
+    Tutorial.destroy({
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Delete successfully"
+                });
+            }
+            else {
+                res.send({
+                    message: `Cannot delete Tutorial with id=${id}`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(400).send({
+                message: `Error deleting with id=${id}`
+            });
+        });
 };
 
 // Delete all
 exports.deleteAll = (req, res) => {
-
+    Tutorial.destroy({
+        where: {},
+        truncate: true
+    })
+        .then(nums => {
+            res.send({
+                message: `${nums} Tutorials were deleted! Empty set`
+            });
+        })
+        .catch(err => {
+            res.send({
+                err:message
+            });
+        });
 };
 
 // Retrieve all published
