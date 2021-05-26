@@ -107,7 +107,7 @@ exports.deleteAll = (req, res) => {
         })
         .catch(err => {
             res.send({
-                err:message
+                message: err.message
             });
         });
 };
