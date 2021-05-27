@@ -3,7 +3,7 @@ const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
 // Create
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
     if (!req.body.title) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -17,15 +17,8 @@ exports.create = (req, res) => {
         published: req.body.published ? req.body.published : false
     };
 
-    Tutorial.create(tutorial)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: err.message || "Some error occurred while creating the Tutorial."
-            });
-        });
+    const result = await Tutorial.create(tutorial);
+    res.send(result);
 };
 
 // Retrieve all
@@ -42,77 +35,51 @@ exports.findOne = async (req, res) => {
 };
 
 // Update
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
 
     const id = req.params.id;
 
-    Tutorial.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Update successfully"
-                });
-            }
-            else {
-                res.send({
-                    message: `Cannot update Tutorial with id=${id}`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: `Error updating with id=${id}`
-            });
+    const num = await Tutorial.update(req.body, { where: { id: id }});
+
+    if (num == 1) {
+        res.send({
+            message: "Update successfully!"
         });
+    }
+    else {
+        res.send({
+            message: `Cannot update Tutorial with id=${id}`
+        });
+    }
 };
 
 // Delete one with id
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
 
-    Tutorial.destroy({
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Delete successfully"
-                });
-            }
-            else {
-                res.send({
-                    message: `Cannot delete Tutorial with id=${id}`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(400).send({
-                message: `Error deleting with id=${id}`
-            });
+    const num = await Tutorial.destroy({ where: { id: id }});
+
+    if (num == 1) {
+        res.send({
+            message: "Delete successfully"
         });
+    }
+    else {
+        res.send({
+            message: `Cannot delete Tutorial with id=${id}`
+        });
+    }
 };
 
 // Delete all
-exports.deleteAll = (req, res) => {
-    Tutorial.destroy({
-        where: {},
-        truncate: true
-    })
-        .then(nums => {
-            res.send({
-                message: `${nums} Tutorials were deleted! Empty set`
-            });
-        })
-        .catch(err => {
-            res.send({
-                message: err.message
-            });
-        });
+exports.deleteAll = async (req, res) => {
+    await Tutorial.destroy({ where: {}, truncate: true });
+    res.send({
+        message: `Empty set`
+    });
 };
 
 // Retrieve all published
 exports.findAllPublished = (req, res) => {
-
+    
 };
