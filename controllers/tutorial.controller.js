@@ -21,7 +21,7 @@ exports.create = async (req, res) => {
     res.send(result);
 };
 
-// Retrieve all
+// Retrieve all 
 exports.findAll = async (req, res) => {
     const result = await Tutorial.findAll();
     res.send(result);
@@ -80,6 +80,11 @@ exports.deleteAll = async (req, res) => {
 };
 
 // Retrieve all published
-exports.findAllPublished = (req, res) => {
-
+exports.findAllPublished = async (req, res) => {
+    const result = await Tutorial.findAll({
+        where: {
+            published: true
+        }
+    });
+    res.send(result);
 };

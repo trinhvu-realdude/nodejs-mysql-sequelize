@@ -6,8 +6,8 @@ module.exports = app => {
     // Create
     router.post('/', tutorials.create);
 
-    // Read all
-    router.get('/', tutorials.findAll);
+    // Read all published
+    router.get('/published', tutorials.findAllPublished);
 
     // Read one with id
     router.get('/:id', tutorials.findOne);
@@ -20,6 +20,9 @@ module.exports = app => {
 
     // Delete all
     router.delete('/', tutorials.deleteAll);
+
+    // Retrieve all 
+    router.get('/', tutorials.findAll);
 
     app.use('/api/tutorials', router);
 };
