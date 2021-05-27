@@ -8,8 +8,6 @@ const sequelize = new Sequelize(
     {
         host: dbConfig.HOST,
         dialect: dbConfig.dialect,
-        operatorsAliases: false,
-
         pool: {
             max: dbConfig.pool.max,
             min: dbConfig.pool.min,
@@ -25,5 +23,18 @@ db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
 db.tutorials = require("./tutorial.model")(sequelize, Sequelize);
+db.users = require("./user.model")(sequelize, Sequelize);
+
+db.users.belongsToMany(db.tutorials, {
+    through: "tutorial_user",
+    as: "users",
+    foreignKey: "user_id"
+});
+
+db.tutorials.belongsToMany(db.users, {
+    through: "tutorial_user",
+    as: "tutorials",
+    foreignKey: "tutorial_id"
+});
 
 module.exports = db;

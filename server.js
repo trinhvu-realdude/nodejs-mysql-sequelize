@@ -30,6 +30,7 @@ app.get('/', (req, res) => {
 })
 
 require("./routes/tutorial.route")(app);
+require("./routes/user.route")(app);
 
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
