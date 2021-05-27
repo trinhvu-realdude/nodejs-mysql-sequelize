@@ -5,15 +5,15 @@ module.exports = app => {
 
     // Create
     router.post('/', tutorials.create);
-
-    // Read all published
-    router.get('/published', tutorials.findAllPublished);
+    
+    // Retrieve all 
+    router.get('/', tutorials.findAll);
 
     // Retrieve all published using query
     router.get('/', tutorials.findAllPublishedQuery);
 
-    // Retrieve all 
-    router.get('/', tutorials.findAll);
+    // Read all published
+    router.get('/published', tutorials.findAllPublished);
 
     // Read one with id
     router.get('/:id', tutorials.findOne);
