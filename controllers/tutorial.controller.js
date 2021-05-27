@@ -75,11 +75,11 @@ exports.delete = async (req, res) => {
 exports.deleteAll = async (req, res) => {
     await Tutorial.destroy({ where: {}, truncate: true });
     res.send({
-        message: `Empty set`
+        message: "Empty set"
     });
 };
 
 // Retrieve all published
 exports.findAllPublished = (req, res) => {
-    
+
 };
