@@ -1,3 +1,4 @@
+const { query } = require("express");
 const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
@@ -88,3 +89,16 @@ exports.findAllPublished = async (req, res) => {
     });
     res.send(result);
 };
+
+// Retrieve all published using query 
+exports.findAllPublishedQuery = async (req, res) => {
+    const {published} = req.query;
+
+    const result = await Tutorial.findAll({
+        where: {
+            published: published == 'true' ? true : false
+        }
+    });
+
+    res.send(result);
+}

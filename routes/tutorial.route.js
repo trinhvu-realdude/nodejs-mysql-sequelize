@@ -9,6 +9,12 @@ module.exports = app => {
     // Read all published
     router.get('/published', tutorials.findAllPublished);
 
+    // Retrieve all published using query
+    router.get('/', tutorials.findAllPublishedQuery);
+
+    // Retrieve all 
+    router.get('/', tutorials.findAll);
+
     // Read one with id
     router.get('/:id', tutorials.findOne);
 
@@ -20,9 +26,6 @@ module.exports = app => {
 
     // Delete all
     router.delete('/', tutorials.deleteAll);
-
-    // Retrieve all 
-    router.get('/', tutorials.findAll);
 
     app.use('/api/tutorials', router);
 };
