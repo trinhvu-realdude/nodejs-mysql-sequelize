@@ -1,11 +1,11 @@
 module.exports = app => {
-    const  tutorials = require("../controllers/tutorial.controller");
+    const tutorials = require("../controllers/tutorial.controller");
 
     const router = require("express").Router();
 
     // Create
     router.post('/', tutorials.create);
-    
+
     // Retrieve all 
     router.get('/', tutorials.findAll);
 
