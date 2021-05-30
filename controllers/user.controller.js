@@ -1,6 +1,5 @@
 const db = require("../models");
-const Tutorial = db.Sequelize;
-const User = db.User;
+const User = db.user;
 
 exports.create = async (req, res) => {
     const test = {

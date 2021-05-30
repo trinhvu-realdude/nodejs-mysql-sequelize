@@ -9,23 +9,23 @@ module.exports = app => {
     // Retrieve all 
     router.get('/', tutorials.findAll);
 
-    // Retrieve all published using query
-    router.get('/', tutorials.findAllPublishedQuery);
+    // // Retrieve all published using query
+    // router.get('/', tutorials.findAllPublishedQuery);
 
-    // Read all published
-    router.get('/published', tutorials.findAllPublished);
+    // // Read all published
+    // router.get('/published', tutorials.findAllPublished);
 
-    // Read one with id
-    router.get('/:id', tutorials.findOne);
+    // // Read one with id
+    // router.get('/:id', tutorials.findOne);
 
-    // Update with id
-    router.put('/:id', tutorials.update);
+    // // Update with id
+    // router.put('/:id', tutorials.update);
 
-    // Delete with id
-    router.delete('/:id', tutorials.delete);
+    // // Delete with id
+    // router.delete('/:id', tutorials.delete);
 
-    // Delete all
-    router.delete('/', tutorials.deleteAll);
+    // // Delete all
+    // router.delete('/', tutorials.deleteAll);
 
     app.use('/api/tutorials', router);
 };

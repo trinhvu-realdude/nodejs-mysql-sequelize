@@ -1,24 +1,25 @@
 const { query } = require("express");
 const db = require("../models");
-const Tutorial = db.tutorials;
-const Op = db.Sequelize.Op;
+const Tutorial = db.tutorial;
+// const Op = db.Sequelize.Op;
 
 // Create
 exports.create = async (req, res) => {
-    if (!req.body.title) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+    // if (!req.body.title) {
+    //     res.status(400).send({
+    //         message: "Content can not be empty!"
+    //     });
+    //     return;
+    // }
 
     const tutorial = {
         title: req.body.title,
         description: req.body.description,
-        published: req.body.published ? req.body.published : false
+        // published: req.body.published ? req.body.published : false
+        user_id: req.body.user_id,
     };
-
     const result = await Tutorial.create(tutorial);
+    console.log(result);
     res.send(result);
 };
 
