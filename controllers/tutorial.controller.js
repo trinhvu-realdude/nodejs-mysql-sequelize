@@ -1,38 +1,34 @@
 const { query } = require("express");
-const db = require("../models");
-const Tutorial = db.tutorial;
-// const Op = db.Sequelize.Op;
+const {
+    createTutorial,
+    findAllTutorial,
+    findTutorialId
+} = require("../services/tutorial.service");
 
 // Create
 exports.create = async (req, res) => {
-    // if (!req.body.title) {
-    //     res.status(400).send({
-    //         message: "Content can not be empty!"
-    //     });
-    //     return;
-    // }
-
+    const {title, description, user_id} = req.body;
     const tutorial = {
-        title: req.body.title,
-        description: req.body.description,
-        // published: req.body.published ? req.body.published : false
-        user_id: req.body.user_id,
+        title: title,
+        description: description,
+        // published: published ? published : false
+        user_id: user_id,
     };
-    const result = await Tutorial.create(tutorial);
+    const result = await createTutorial(tutorial);
     console.log(result);
     res.send(result);
 };
 
 // Retrieve all 
 exports.findAll = async (req, res) => {
-    const result = await Tutorial.findAll();
+    const result = await findAllTutorial();
     res.send(result);
 };
 
 // Retrieve one with id
 exports.findOne = async (req, res) => {
     const id = req.params.id;
-    const result = await Tutorial.findByPk(id);
+    const result = await findTutorialId(id);
     res.send(result);
 };
 

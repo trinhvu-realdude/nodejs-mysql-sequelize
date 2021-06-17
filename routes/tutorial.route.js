@@ -4,28 +4,28 @@ module.exports = app => {
     const router = require("express").Router();
 
     // Create
-    router.post('/', tutorials.create);
+    router.post('/tutorials', tutorials.create);
 
     // Retrieve all 
-    router.get('/', tutorials.findAll);
+    router.get('/tutorials', tutorials.findAll);
 
-    // // Retrieve all published using query
-    // router.get('/', tutorials.findAllPublishedQuery);
+    // Retrieve all published using query
+    router.get('/tutorials', tutorials.findAllPublishedQuery);
 
-    // // Read all published
-    // router.get('/published', tutorials.findAllPublished);
+    // Read all published
+    router.get('/tutorials/published', tutorials.findAllPublished);
 
-    // // Read one with id
-    // router.get('/:id', tutorials.findOne);
+    // Read one with id
+    router.get('/tutorials/:id', tutorials.findOne);
 
-    // // Update with id
-    // router.put('/:id', tutorials.update);
+    // Update with id
+    router.put('/tutorials/:id', tutorials.update);
 
-    // // Delete with id
-    // router.delete('/:id', tutorials.delete);
+    // Delete with id
+    router.delete('/tutorials/:id', tutorials.delete);
 
-    // // Delete all
-    // router.delete('/', tutorials.deleteAll);
+    // Delete all
+    router.delete('/tutorials', tutorials.deleteAll);
 
-    app.use('/api/tutorials', router);
+    app.use('/api', router);
 };

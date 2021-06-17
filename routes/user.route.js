@@ -6,7 +6,9 @@ module.exports = app => {
 
     router.get('/', users.findAll);
 
-    router.get('/users-tutorials', users.findAllUserTutorial);
+    router.get('/tutorial', users.findAllUserTutorial);
+
+    router.get('/contact-info', users.findAllUserContactInfo);
 
     app.use('/api/users', router);
 }
